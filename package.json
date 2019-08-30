@@ -1,0 +1,52 @@
+{
+  "author": {
+    "email": "rfcaio90@gmail.com",
+    "name": "Caio Rodrigues Fernandes",
+    "url": "https://github.com/rfcaio"
+  },
+  "dependencies": {
+    "jquery": "3.4.1"
+  },
+  "description": "A simple app based on Alura's jQuery course.",
+  "devDependencies": {
+    "browser-sync": "2.26.7",
+    "csslint": "1.0.5",
+    "del": "5.0.0",
+    "dotenv": "8.1.0",
+    "gulp": "4.0.2",
+    "gulp-autoprefixer": "7.0.0",
+    "gulp-clean-css": "4.2.0",
+    "gulp-concat": "2.6.1",
+    "gulp-csslint": "1.0.1",
+    "gulp-html-replace": "1.6.2",
+    "gulp-jshint": "2.1.0",
+    "gulp-sourcemaps": "2.6.5",
+    "gulp-uglify": "3.0.2",
+    "husky": "1.0.0",
+    "jshint": "2.10.2",
+    "jshint-stylish": "2.2.1"
+  },
+  "homepage": "https://github.com/rfcaio/jquery-alura-course#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
+  },
+  "license": "MIT",
+  "name": "jquery-alura-course",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rfcaio/jquery-alura-course.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "lint": "npm run lint:css && npm run lint:gulp && npm run lint:src",
+    "lint:css": "csslint src/",
+    "lint:gulp": "jshint --verbose gulpfile.js",
+    "lint:src": "jshint --verbose src/",
+    "start": "gulp serve"
+  },
+  "version": "1.0.0"
+}
