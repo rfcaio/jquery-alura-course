@@ -10,8 +10,16 @@
 </head>
 <body>
   <main>
-    <h3 id="message">That was pathetic!</h3>
-    <span id="message-length"></span>
+    <section>
+      <h3 id="game-phrase">That was pathetic!</h3>
+      <p>Words: <span id="game-phrase-word-amount">0</span></p>
+    </section>
+
+    <section>
+      <input id="game-input" type="text">
+      <p>Characters: <span id="game-input-length">0</span></p>
+      <p>Words: <span id="game-input-word-amount">0</span></p>
+    </section>
   </main>
   <!-- build:js -->
   <script src="vendor/jquery/dist/jquery.js"></script>
