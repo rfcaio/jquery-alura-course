@@ -11,7 +11,7 @@
         if (time <= 1) {
           $('#game-restart-button').removeAttr('disabled');
           clearInterval(gameInterval);
-          gameInput.attr('disabled', true);
+          gameInput.removeAttr('class').attr('disabled', true);
         }
         $('#game-time').text(time - 1);
       }, 1000);
@@ -29,13 +29,27 @@
 
   var setScoreUpdate = function setScoreUpdate () {
     var gameInput = $('#game-input');
+    var gamePhrase = $('#game-phrase').text();
     var isNonEmptyString = function isNonEmptyString (word) {
       return word !== '';
     };
+    var setGameInputAsCorrect = function setGameInputAsCorrect () {
+      gameInput.addClass('is-correct').removeClass('is-wrong');
+    };
+    var setGameInputAsWrong = function setGameInputAsWrong () {
+      gameInput.removeClass('is-correct').addClass('is-wrong');
+    };
 
     gameInput.on('input', function onGameInputChange () {
-      $('#game-input-length').text(gameInput.val().length);
-      $('#game-input-word-amount').text(gameInput.val().split(/\s+/).filter(isNonEmptyString).length);
+      var gameInputValue = gameInput.val();
+      var gameInputValueLength = gameInputValue.length;
+      var isGameInputCorrect = function isGameInputCorrect () {
+        return gameInputValue !== '' && gameInputValue === gamePhrase.slice(0, gameInputValueLength);
+      };
+
+      $('#game-input-length').text(gameInputValueLength);
+      $('#game-input-word-amount').text(gameInputValue.split(/\s+/).filter(isNonEmptyString).length);
+      void (isGameInputCorrect() ? setGameInputAsCorrect() : setGameInputAsWrong());
     });
   };
 

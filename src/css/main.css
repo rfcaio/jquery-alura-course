@@ -11,3 +11,16 @@ body {
 input[id="game-input"] {
   width: 50%;
 }
+
+.is-correct,
+.is-wrong {
+  color: white;
+}
+
+.is-correct {
+  background-color: green;
+}
+
+.is-wrong {
+  background-color: red;
+}
