@@ -3,6 +3,9 @@
   "curly": true,
   "devel": true,
   "eqeqeq": true,
+  "globals": {
+    "ScoreTable": false
+  },
   "jquery": true,
   "node": true,
   "strict": true,

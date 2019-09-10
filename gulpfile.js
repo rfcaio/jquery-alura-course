@@ -37,7 +37,7 @@ var html = function html () {
 
 var scripts = function scripts () {
   return gulp
-    .src(['node_modules/jquery/dist/jquery.js', 'src/js/app.js'])
+    .src(['node_modules/jquery/dist/jquery.js', 'src/js/score-table.js', 'src/js/app.js'])
     .pipe(sourcemaps.init())
     .pipe(concat('bundle.js'))
     .pipe(uglify())

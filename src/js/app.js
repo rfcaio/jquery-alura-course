@@ -1,17 +1,21 @@
 
-(function () {
+(function (ScoreTable) {
   'use strict';
 
   var setClockUpdate = function setClockUpdate () {
     var gameInput = $('#game-input');
+    var finishGame = function finishGame (intervalId) {
+      $('#game-restart-button').removeAttr('disabled');
+      clearInterval(intervalId);
+      gameInput.removeAttr('class').attr('disabled', true);
+    };
 
     gameInput.one('focus', function onGameInputFocus () {
-      var gameInterval = setInterval(function tick () {
+      var intervalId = setInterval(function tick () {
         var time = parseInt($('#game-time').text(), 10);
         if (time <= 1) {
-          $('#game-restart-button').removeAttr('disabled');
-          clearInterval(gameInterval);
-          gameInput.removeAttr('class').attr('disabled', true);
+          finishGame(intervalId);
+          updateTableScore($('#game-input-word-amount').text());
         }
         $('#game-time').text(time - 1);
       }, 1000);
@@ -60,5 +64,9 @@
     setClockUpdate();
   };
 
+  var updateTableScore = function updateTableScore (score) {
+    ScoreTable.insert(score);
+  };
+
   $(document).ready(startGame);
-}());
+}(ScoreTable));
