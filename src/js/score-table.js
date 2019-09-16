@@ -3,10 +3,11 @@
 var ScoreTable = (function () {
   'use strict';
 
-  var gameScoreTable = $('#game-score-table').find('tbody');
+  var gameScoreTable = $('#game-score-table');
 
   var insert = function insert (content) {
-    gameScoreTable.append(_newLine(content));
+    gameScoreTable.find('tbody').append(_newLine(content));
+    gameScoreTable.fadeIn(500);
   };
 
   var _newCell = function _newCell (content) {
@@ -15,7 +16,10 @@ var ScoreTable = (function () {
 
   var _newDeleteButton = function _newDeleteButton () {
     var onClickToRemove = function onClickToRemove () {
-      $(this).parent().parent().remove();
+      var self = $(this).parent().parent();
+      self.fadeOut('slow', function remove () {
+        self.remove();
+      });
     };
     return $('<button>').text('Remove').click(onClickToRemove);
   };

@@ -57,9 +57,14 @@
     });
   };
 
+  var showGameScore = function showGameScore () {
+    $('#game-score-table').stop().fadeToggle(500);
+  };
+
   var startGame = function startGame () {
     $('#game-phrase-word-amount').text($('#game-phrase').text().split(/\s+/).length);
     $('#game-restart-button').click(setGameRestart);
+    $('#game-show-score-button').click(showGameScore);
     setScoreUpdate();
     setClockUpdate();
   };
