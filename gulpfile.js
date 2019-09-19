@@ -47,6 +47,40 @@ var scripts = function scripts () {
 
 var serve = function serve () {
   browserSync.init({
+    middleware: [
+      {
+        handle: function handleRequest (req, res) {
+          res.end(JSON.stringify([
+            {
+              id: 0,
+              text: 'There is no knowledge that is not power',
+              time: 15
+            },
+            {
+              id: 1,
+              text: 'You will never win',
+              time: 10
+            },
+            {
+              id: 2,
+              text: 'Feel the wrath of Shao Kahn',
+              time: 15
+            },
+            {
+              id: 3,
+              text: 'You suck',
+              time: 3
+            },
+            {
+              id: 4,
+              text: 'That was pathetic',
+              time: 5
+            }
+          ], null, 2));
+        },
+        route: '/api/phrases'
+      }
+    ],
     port: process.env.PORT || 3000,
     server: {
       baseDir: './src',

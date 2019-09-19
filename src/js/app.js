@@ -2,6 +2,8 @@
 (function (ScoreTable) {
   'use strict';
 
+  var gameTime = 10;
+
   var setClockUpdate = function setClockUpdate () {
     var gameInput = $('#game-input');
     var finishGame = function finishGame (intervalId) {
@@ -27,13 +29,24 @@
     $('#game-input-length').text(0);
     $('#game-input-word-amount').text(0);
     $('#game-restart-button').attr('disabled', true);
-    $('#game-time').text(10);
+    $('#game-time').text(gameTime);
     setClockUpdate();
+  };
+
+  var setPhraseChange = function setPhraseChange () {
+    $.get('/api/phrases', function success (response) {
+      response = JSON.parse(response);
+      var index = Math.floor(Math.random() * response.length);
+      var text = response[index].text;
+      gameTime = response[index].time;
+      $('#game-phrase').text(text);
+      $('#game-phrase-word-amount').text($('#game-phrase').text().split(/\s+/).length);
+      $('#game-time').text(gameTime);
+    });
   };
 
   var setScoreUpdate = function setScoreUpdate () {
     var gameInput = $('#game-input');
-    var gamePhrase = $('#game-phrase').text();
     var isNonEmptyString = function isNonEmptyString (word) {
       return word !== '';
     };
@@ -47,6 +60,7 @@
     gameInput.on('input', function onGameInputChange () {
       var gameInputValue = gameInput.val();
       var gameInputValueLength = gameInputValue.length;
+      var gamePhrase = $('#game-phrase').text();
       var isGameInputCorrect = function isGameInputCorrect () {
         return gameInputValue !== '' && gameInputValue === gamePhrase.slice(0, gameInputValueLength);
       };
@@ -63,8 +77,10 @@
 
   var startGame = function startGame () {
     $('#game-phrase-word-amount').text($('#game-phrase').text().split(/\s+/).length);
+    $('#game-change-phrase-button').click(setPhraseChange);
     $('#game-restart-button').click(setGameRestart);
     $('#game-show-score-button').click(showGameScore);
+    $('#game-time').text(gameTime);
     setScoreUpdate();
     setClockUpdate();
   };
