@@ -28,3 +28,12 @@ section > table {
 .is-wrong {
   background-color: red;
 }
+
+#game-error,
+#game-loading {
+  display: none;
+}
+
+#game-error {
+  color: crimson;
+}

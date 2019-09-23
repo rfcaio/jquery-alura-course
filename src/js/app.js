@@ -34,15 +34,26 @@
   };
 
   var setPhraseChange = function setPhraseChange () {
-    $.get('/api/phrases', function success (response) {
-      response = JSON.parse(response);
-      var index = Math.floor(Math.random() * response.length);
-      var text = response[index].text;
-      gameTime = response[index].time;
-      $('#game-phrase').text(text);
-      $('#game-phrase-word-amount').text($('#game-phrase').text().split(/\s+/).length);
-      $('#game-time').text(gameTime);
-    });
+    $('#game-loading').show();
+    $.get('/api/phrases')
+      .done(function onSuccess (response) {
+        response = JSON.parse(response);
+        var index = Math.floor(Math.random() * response.length);
+        var text = response[index].text;
+        gameTime = response[index].time;
+        $('#game-phrase').text(text);
+        $('#game-phrase-word-amount').text($('#game-phrase').text().split(/\s+/).length);
+        $('#game-time').text(gameTime);
+      })
+      .fail(function onFail () {
+        $('#game-error').show();
+        setTimeout(function toggleGameErrors () {
+          $('#game-error').hide();
+        }, 2000);
+      })
+      .always(function afterResponse () {
+        $('#game-loading').hide();
+      });
   };
 
   var setScoreUpdate = function setScoreUpdate () {
