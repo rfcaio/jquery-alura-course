@@ -1,4 +1,7 @@
 {
+  "name": "jquery-alura-course",
+  "version": "0.0.0",
+  "description": "A simple app based on Alura's jQuery course.",
   "author": {
     "email": "rfcaio90@gmail.com",
     "name": "Caio Rodrigues Fernandes",
@@ -7,7 +10,6 @@
   "dependencies": {
     "jquery": "3.4.1"
   },
-  "description": "A simple app based on Alura's jQuery course.",
   "devDependencies": {
     "browser-sync": "2.26.7",
     "csslint": "1.0.5",
@@ -34,7 +36,6 @@
     }
   },
   "license": "MIT",
-  "name": "jquery-alura-course",
   "private": true,
   "repository": {
     "type": "git",
@@ -47,6 +48,5 @@
     "lint:gulp": "jshint --verbose gulpfile.js",
     "lint:src": "jshint --verbose src/",
     "start": "gulp serve"
-  },
-  "version": "1.0.0"
+  }
 }
